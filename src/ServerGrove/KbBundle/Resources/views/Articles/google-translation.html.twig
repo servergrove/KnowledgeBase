@@ -1,0 +1,18 @@
+{% extends "ServerGroveKbBundle:Default:layout.html.twig" %}
+
+{% block content %}
+{% spaceless %}
+<h2>{% trans %}Categories{% endtrans %}</h2>
+
+<h3 class="article-title">{{ article.title }}(Needs to be translated by Google)</h3>
+<p class="article-content">{{ article.content | raw }}</p>
+<div>Related Urls</div>
+<ul class="related-urls">
+    {% for url in article.urls %}
+    <li><a href="{{ url.url }}">{{ url.name }}</a></li>
+    {% endfor %}
+</ul>
+
+
+{% endspaceless %}
+{% endblock %}

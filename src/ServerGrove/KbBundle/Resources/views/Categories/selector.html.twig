@@ -1,0 +1,28 @@
+{% if categories|length > 0 %}
+{% spaceless %}
+<ul class="nav nav-tabs nav-stacked">
+    <li class="nav-header">Categories</li>
+
+    {% if topCategory != null %}
+    {% set current = topCategory.getPath() %}
+    {% else %}
+    {% set current = null %}
+    {% endif %}
+
+    {% for cat in categories %}
+    {% set path = cat.getPath() %}
+    {{ _self.drawCategoryMenu(cat, path != null and current == path) }}
+    {% endfor %}
+</ul>
+{% endspaceless %}
+{% endif %}
+
+{% macro drawCategoryMenu(category, current) %}
+{% spaceless %}
+<li{% if current %} class="active" {% endif %}>
+    <a href="{{ path('sgkb_categories_view', { 'path': category.getPath(), '_format': 'html' }) }}">
+        {{ category.getName() }}
+    </a>
+</li>
+{% endspaceless %}
+{% endmacro %}

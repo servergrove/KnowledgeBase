@@ -1,0 +1,55 @@
+{% import "ServerGroveKbBundle:Admin:macros.html.twig" as sgkb %}
+{% import "ServerGroveKbBundle::macros.html.twig" as sgkb_breadcrumb %}
+<!DOCTYPE html>
+<html ng-app="ServerGroveKbAdmin">
+    <head>
+        <title>{% block title %} Admin - Knowledge Base{% endblock %}</title>
+        {% block metas %}{% endblock %}
+        {% block stylesheets %}
+        {% spaceless %}
+        {% stylesheets
+            "../vendor/codemirror/codemirror/lib/codemirror.css"
+            "@ServerGroveKbBundle/Resources/public/css/*.css"
+            "@ServerGroveKbBundle/Resources/public/css/backend/*.css"
+            filter="?yui_css" output="/css/compiled/admin.css" %}
+        <link rel="stylesheet" media="all" type="text/css" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+        {% endspaceless %}
+        {% endblock %}
+
+        {% block javascripts %}
+        {% spaceless %}
+        {% javascripts
+            "@ServerGroveKbBundle/Resources/public/js/*.js"
+            "../vendor/chjj/marked/lib/marked.js"
+            "../vendor/codemirror/codemirror/lib/codemirror.js"
+            "../vendor/codemirror/codemirror/mode/xml/xml.js"
+            "../vendor/codemirror/codemirror/mode/markdown/markdown.js"
+            "../vendor/codemirror/codemirror/mode/javascript/javascript.js"
+            "../vendor/codemirror/codemirror/mode/css/css.js"
+            "../vendor/codemirror/codemirror/mode/htmlmixed/htmlmixed.js"
+            "@ServerGroveKbBundle/Resources/public/js/backend/*.js"
+            filter="?yui_js"
+            output="/js/compiled/admin.js" %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% endspaceless %}
+        {% endblock %}
+    </head>
+    <body>
+        {% include "ServerGroveKbBundle:Admin:partials.html.twig" %}
+        {% block preheader %}
+        {% render "ServerGroveKbBundle:Admin/Default:topbar" %}
+        {% endblock preheader %}
+        {% block postheader %}{% endblock postheader %}
+
+        <div class="container-fluid" id="doccontent">
+            <div class="row-fluid">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+
+        {% block prefooter %}{% endblock prefooter %}
+        {% block postfooter %}{% endblock postfooter %}
+    </body>
+</html>

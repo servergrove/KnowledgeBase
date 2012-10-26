@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="server_grove_kb.markdown.parser.class">ServerGrove\KbBundle\Util\MarkdownParser</parameter>
+        <parameter key="server_grove_kb.security.user.provider.class">ServerGrove\KbBundle\Security\User\UserProvider</parameter>
+        <parameter key="server_grove_kb.form.type.locale.class">ServerGrove\KbBundle\Form\Type\LocaleType</parameter>
+        <parameter key="server_grove_kb.form.type.editor.class">ServerGrove\KbBundle\Form\Type\EditorType</parameter>
+        <parameter key="server_grove_kb.form.type.category.class">ServerGrove\KbBundle\Form\Type\CategoryType</parameter>
+        <parameter key="server_grove_kb.form.type.prepended_date.class">ServerGrove\KbBundle\Form\Type\Prepended\DateType</parameter>
+        <parameter key="server_grove_kb.listener.user.action.class">ServerGrove\KbBundle\Listener\UserActionListener</parameter>
+        <parameter key="server_grove_kb.twig.extension.text.class">ServerGrove\KbBundle\Twig\TextExtension</parameter>
+        <parameter key="server_grove_kb.twig.extension.article.class">ServerGrove\KbBundle\Twig\ArticleExtension</parameter>
+        <parameter key="server_grove_kb.request.phpcr_param_converter.class">ServerGrove\KbBundle\Request\PHPCRParamConverter</parameter>
+    </parameters>
+
+    <services>
+        <service id="server_grove_kb.markdown.parser" class="%server_grove_kb.markdown.parser.class%" public="false"/>
+
+        <service id="server_grove_kb.security.user.provider" class="%server_grove_kb.security.user.provider.class%" public="false">
+            <argument type="service" id="doctrine_phpcr.odm.default_document_manager"/>
+        </service>
+
+        <service id="server_grove_kb.request.phpcr_param_converter" class="%server_grove_kb.request.phpcr_param_converter.class%" public="false">
+            <argument type="service" id="doctrine_phpcr.odm.default_document_manager"/>
+            <tag name="request.param_converter" converter="doctrine.phpcr"/>
+        </service>
+
+        <service id="server_grove_kb.form.type.locale" class="%server_grove_kb.form.type.locale.class%">
+            <argument>%server_grove_kb.locales%</argument>
+            <tag name="form.type" alias="sg_locale"/>
+        </service>
+
+        <service id="server_grove_kb.form.type.editor" class="%server_grove_kb.form.type.editor.class%">
+            <argument>%server_grove_kb.editor_type%</argument>
+            <tag name="form.type" alias="sg_editor"/>
+        </service>
+
+        <service id="server_grove_kb.form.type.category" class="%server_grove_kb.form.type.category.class%">
+            <argument type="service" id="doctrine_phpcr"/>
+            <tag name="form.type" alias="sg_category"/>
+        </service>
+
+        <service id="server_grove_kb.form.type.prepended_date" class="%server_grove_kb.form.type.prepended_date.class%">
+            <tag name="form.type" alias="sg_prepended_date"/>
+        </service>
+
+        <service id="server_grove_kb.listener.user.action" class="%server_grove_kb.listener.user.action.class%">
+            <argument type="service" id="service_container"/>
+            <argument>%server_grove_kb.mailer.from.name%</argument>
+            <argument>%server_grove_kb.mailer.from.email%</argument>
+            <tag name="doctrine.odm.mongodb.default_event_listener" event="postUpdate"/>
+        </service>
+
+        <service id="server_grove_kb.twig.extension.text" class="%server_grove_kb.twig.extension.text.class%">
+            <argument type="service" id="translator"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="server_grove_kb.twig.extension.article" class="%server_grove_kb.twig.extension.article.class%">
+            <argument type="service" id="doctrine_phpcr.odm.default_document_manager"/>
+            <argument>%server_grove_kb.locales%</argument>
+            <argument>ServerGroveKbBundle:Admin:locales.html.twig</argument>
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

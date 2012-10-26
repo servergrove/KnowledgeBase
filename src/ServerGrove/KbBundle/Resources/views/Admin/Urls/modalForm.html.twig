@@ -1,0 +1,16 @@
+<div id="url-form-modal" class="modal hide fade in">
+    <form id="article_url_form" class="form-stacked" action="{{ path('sgkb_admin_urls_create') }}" method="post" {{ form_enctype(form) }}>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>Register Url</h3>
+        </div>
+        <div class="modal-body">
+            {{ form_widget(form) }}
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{% trans %}Register{% endtrans %}</button>
+            &nbsp;
+            <button type="button" class="btn" data-dismiss="modal">{% trans %}Cancel{% endtrans %}</button>
+        </div>
+    </form>
+</div>

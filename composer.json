@@ -1,0 +1,87 @@
+{
+    "name": "symfony/framework-standard-edition",
+    "description": "The \"Symfony Standard Edition\" distribution",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.1.*",
+        "doctrine/doctrine-bundle": "1.0.*",
+        "twig/extensions": "1.0.*",
+        "symfony/assetic-bundle": "2.1.*",
+        "symfony/swiftmailer-bundle": "2.1.*",
+        "symfony/monolog-bundle": "2.1.*",
+        "sensio/distribution-bundle": "2.1.*",
+        "sensio/framework-extra-bundle": "2.1.*",
+        "sensio/generator-bundle": "2.1.*",
+        "jms/security-extra-bundle": "1.2.*",
+        "jms/di-extra-bundle": "1.1.*",
+        "codemirror/codemirror": "v2.33",
+        "chjj/marked": "v0.2.5",
+        "doctrine/phpcr-bundle": "dev-master",
+        "doctrine/phpcr-odm": "1.0.x-dev",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "servergrove/translation-editor-bundle": "dev-master",
+        "jackalope/jackalope-jackrabbit": "dev-master",
+        "knplabs/knp-markdown-bundle": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "codemirror/codemirror",
+                "version": "2.33",
+                "dist": {
+                    "url": "https://github.com/marijnh/CodeMirror/zipball/v2.33",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/marijnh/CodeMirror",
+                    "type": "git",
+                    "reference": "https://github.com/marijnh/CodeMirror/tags"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "chjj/marked",
+                "version": "v0.2.5",
+                "dist": {
+                    "url": "https://github.com/chjj/marked/zipball/v0.2.5",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/chjj/marked",
+                    "type": "git",
+                    "reference": "https://github.com/chjj/marked/tags"
+                }
+            }
+        }
+    ],
+    "scripts": {
+        "post-install-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "ServerGrove\\KbBundle\\Composer\\JackrabbitInstaller::checkAndInstall"
+        ],
+        "post-update-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "ServerGrove\\KbBundle\\Composer\\JackrabbitInstaller::checkAndInstall"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web"
+    }
+}

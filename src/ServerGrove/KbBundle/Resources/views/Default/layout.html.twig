@@ -1,0 +1,40 @@
+{% extends "ServerGroveKbBundle::layout.html.twig" %}
+
+{% block preheader %}
+
+{% endblock %}
+
+{% block postheader %}
+<h1>{% trans %}Knowledge Base{% endtrans %}</h1>
+{% endblock %}
+
+{% block stylesheets %}
+{% spaceless %}
+{% stylesheets
+    "@ServerGroveKbBundle/Resources/public/css/*.css"
+    "@ServerGroveKbBundle/Resources/public/css/frontend/*.css"
+    filter="?yui_css" output="/css/compiled/default.css" %}
+<link rel="stylesheet" media="all" type="text/css" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endspaceless %}
+{% endblock %}
+
+{% block prefooter %}
+
+    <div class="well">
+        <div style="text-align: right;">
+            <a href="{{ path('sgkb_admin') }}" target="_blank" class="btn">{% trans %}Admin{% endtrans %}</a>
+            {% if article is defined and is_granted('ROLE_EDITOR') %}
+                &nbsp;
+                <a href="{{ path('sgkb_admin_articles_edit', { 'slug': article.getSlug() }) }}" target="_blank" class="btn">{% trans %}Edit this page{% endtrans %}</a>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                {% if category is defined %}
+                    <a target="_blank" href="{{ path('sgkb_admin_categories_new_article', { 'path': category.getPath() }) }}" class="btn">{% trans %}Add Article{% endtrans %}</a>
+                {% else %}
+                    <a target="_blank" href="{{ path('sgkb_admin_articles_new') }}" class="btn">{% trans %}Add Article{% endtrans %}</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,2 @@
+parameters: 
+    doctrine_phpcr.jackrabbit_jar: %kernel.root_dir%/Resources/java/jackrabbit/jackrabbit-standalone-2.4.3.jar

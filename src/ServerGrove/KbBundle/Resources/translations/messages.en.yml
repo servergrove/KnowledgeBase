@@ -1,0 +1,43 @@
+Cancel: Cancel
+Edit: Edit
+Delete: Delete
+Create a new entry: Create a new entry
+You are logged in the admin area: You are logged in the admin area
+Click <a href="%path%" target="_blank">here</a> to return now: Click <a href="%path%" target="_blank">here</a> to return now
+Knowledge Base: Knowledge Base
+Logout: Logout
+Username: Username
+Password: Password
+Login: Login
+Article edit: Article edit
+Back to the list: Back to the list
+Translations: Translations
+Article list: Article list
+Id: Id
+Name: Name
+Created: Created
+Updated: Updated
+Is Active: Is Active
+Categories: Categories
+Slug: Slug
+Actions: Actions
+Show: Show
+Article creation: Article creation
+Create: Create
+Article: Article
+Category edit: Category edit
+Articles: Articles
+Categories list: Categories list
+articles: articles
+No categories have been found: No categories have been found
+Category creation: Category creation
+Category: Category
+Translation edit: Translation edit
+Translation list: Translation list
+Locale: Locale
+Versions: Versions
+Translation creation: Translation creation
+Translation: Translation
+Title: Title
+Category %name%: Category %name%
+Admin: Admin

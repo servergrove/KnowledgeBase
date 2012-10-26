@@ -1,0 +1,12 @@
+{% extends "ServerGroveKbBundle:Default:layout.html.twig" %}
+{% block content %}
+{% render "ServerGroveKbBundle:Default:searchForm" %}
+<h2>{% trans %}Articles{% endtrans %}</h2>
+<ul class="unstyled">
+    {% for article in results %}
+    <li><a href="{{ path('sgkb_articles_view', { slug: article.getSlug(), path: article.getCategories().first().getPath() }) }}">{{ article }}</a></li>
+    {% else %}
+    <li>{% trans %}No articles found{% endtrans %}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

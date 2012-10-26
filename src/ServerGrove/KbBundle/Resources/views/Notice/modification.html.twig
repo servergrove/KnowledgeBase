@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        The article {{ article.name }} has been modified by {{ current.user.username }} for the locale "{{ app.request.locale }}".
+        <br/><br/>
+        <table border="1" cellpadding="1" cellspacing="0" width="100%">
+            <tr style="background-color: #333; color: #FFF;">
+                <td width="50%">Active version</td>
+                <td width="50%">User's version</td>
+            </tr>
+            <tr>
+                <td width="50%">{{ previous.content }}</td>
+                <td width="50%">{{ current.content }}</td>
+            </tr>
+        </table>
+    </body>
+</html>

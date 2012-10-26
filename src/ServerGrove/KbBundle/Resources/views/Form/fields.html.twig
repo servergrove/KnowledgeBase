@@ -1,0 +1,130 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_row %}
+{% spaceless %}
+<div {{ block('row_container_attributes') }}>
+    {% if form.has('expanded') and form.get('expanded') and form.has('multiple') and not form.get('multiple') %}
+    {{ form_label(form, label|default(null)) }}
+    <div class="controls">
+        <!--editor type-->
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </div>
+    {% elseif form.has('checked') %}
+    <div class="controls">
+        {{ block('form_checkbox') }}
+    </div>
+    {% else %}
+    {{ form_label(form, label|default(null)) }}
+    <div class="controls">
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </div>
+    {% endif %}
+</div>
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block form_checkbox %}
+<label class="checkbox{{ required ? ' required' : '' }}">
+    {% if label is empty %}
+    {% set label = name|humanize %}
+    {% endif %}
+
+    {{ form_widget(form) }} {{ label }}
+    {{ form_errors(form) }}
+</label>
+{% endblock %}
+
+{# Widgets #}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+{% for child in form %}
+<label class="radio inline">
+    {% if not child.has('label') or child.get('label') is empty %}
+    {% set label = child.get('name')|humanize %}
+    {% else %}
+    {% set label = child.get('label')|humanize %}
+    {% endif %}
+
+    {{ form_widget(child, { 'attr': attr }) }} {{ label }}
+</label>
+{% endfor %}
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block sg_editor_widget %}
+{{ form_widget(form, { 'attr': { 'rows': 20 } }) }}
+{% endblock sg_editor_widget %}
+
+{% block form_widget %}
+{% spaceless %}
+{% if legend is defined %}
+<legend>{{ legend }}</legend>
+{% endif %}
+{{ form_errors(form) }}
+{{ block('form_rows') }}
+{{ form_rest(form) }}
+{% endspaceless %}
+{% endblock form_widget %}
+
+{% block sg_prepended_date_widget %}
+{% spaceless %}
+<div class="input-prepend">
+    <span class="add-on">
+        <input type="checkbox" class="enabler">
+    </span>
+
+    {{ date_pattern|replace({
+        '{{ year }}':  form_widget(form.year, { attr: attr|merge({ class: 'input-mini' }) }),
+        '{{ month }}': form_widget(form.month, { attr: attr|merge({ class: 'input-mini' }) }),
+        '{{ day }}':   form_widget(form.day, { attr: attr|merge({ class: 'input-mini' }) }),
+    })|raw }}
+</div>
+{% endspaceless %}
+{% endblock sg_prepended_date_widget %}
+
+{# Labels #}
+
+{% block form_label %}
+{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' control-label')|trim}) %}
+{{ parent() }}
+{% endblock form_label %}
+
+{# Errors #}
+
+{% block field_errors %}
+{% spaceless %}
+{% if errors|length > 0 %}
+<span class="help-inline">
+    {% for error in errors %}
+        {% if loop.index > 1 %}
+        ,&nbsp;
+        {% endif %}
+        {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+    {% endfor %}
+</span>
+{% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
+
+{# Element attributes #}
+
+{% block row_container_attributes %}
+{% spaceless %}
+{% set attr = { 'class': 'control-group' } %}
+{% if errors|length > 0 %}
+{% set attr = attr|merge({ 'class': 'error ' ~ attr.class }) %}
+{% endif %}
+{% for attrname,attrvalue in attr %}{{attrname}}="{{attrvalue}}" {% endfor %}
+{% endspaceless %}
+{% endblock row_container_attributes %}
+
+
+{% block widget_attributes %}
+{% spaceless %}
+{% set attr = { class: 'input-xlarge' }|merge(attr) %}
+{{ parent() }}
+{% endspaceless %}
+{% endblock widget_attributes %}

@@ -1,0 +1,42 @@
+Edit: pt__Edit
+Delete: pt__Delete
+'Create a new entry': 'pt__Create a new entry'
+'You are logged in the admin area': 'pt__You are logged in the admin area'
+'Click <a href="%path%" target="_blank">here</a> to return now': 'pt__Click <a href="%path%" target="_blank">here</a> to return now'
+'Knowledge Base': 'pt__Knowledge Base'
+Logout: pt__Logout
+Username: pt__Username
+Password: pt__Password
+Login: pt__Login
+'Article edit': 'pt__Article edit'
+'Back to the list': 'pt__Back to the list'
+Translations: pt__Translations
+'Article list': 'pt__Article list'
+Id: pt__Id
+Name: pt__Name
+Created: pt__Created
+Updated: pt__Updated
+'Is Active': 'pt__Is Active'
+Categories: pt__Categories
+Slug: pt__Slug
+Actions: pt__Actions
+show: pt__show
+'Article creation': 'pt__Article creation'
+Create: pt__Create
+Article: pt__Article
+'Category edit': 'pt__Category edit'
+Articles: pt__Articles
+'Categories list': 'pt__Categories list'
+articles: pt__articles
+'No categories have been found': 'pt__No categories have been found'
+'Category creation': 'pt__Category creation'
+Category: pt__Category
+'Translation edit': 'pt__Translation edit'
+'Translation list': 'pt__Translation list'
+Locale: pt__Locale
+Versions: pt__Versions
+'Translation creation': 'pt__Translation creation'
+Translation: pt__Translation
+Title: pt__Title
+'Category %name%': 'pt__Category %name%'
+Admin: pt__Admin

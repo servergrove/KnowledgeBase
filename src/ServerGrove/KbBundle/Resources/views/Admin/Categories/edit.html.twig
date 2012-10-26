@@ -1,0 +1,33 @@
+{% extends "ServerGroveKbBundle:Admin:layout.html.twig" %}
+
+{% block postheader %}
+    {{ parent() }}
+    {{ sgkb_breadcrumb.displayBreadcrumb(false, document, true) }}
+{% endblock postheader %}
+
+{% block content %}
+    <h1>{% trans %}Category edit{% endtrans %}</h1>
+
+    {% if translation_forms is defined %}
+        <form method="post" action="{{ path('sgkb_admin_categories_update', { 'path': document.path }) }}">
+            <legend>{% trans %}Settings{% endtrans %}</legend>
+            {{ form_widget(settings_form) }}
+
+            {% for locale,translation_form in translation_forms %}
+                {{ form_widget(translation_form, { 'legend': 'Category translation for locale "%locale%"'|trans({ '%locale%': locale }) }) }}
+            {% endfor %}
+
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">{% trans %}Save{% endtrans %}</button>
+                &nbsp;
+                <a class="btn" href="{{ path('sgkb_admin_categories_index') }}">{% trans %}Cancel{% endtrans %}</a>
+            </div>
+        </form>
+    {% endif %}
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <delete-form action="{{ path('sgkb_admin_categories_delete', { 'path': document.getPath() }) }}" method="post" button="{% trans %}Delete{% endtrans %}" confirmation="{% trans %}Are you sure you want to delete this category?{% endtrans %}">
+            {{ form_widget(delete_form) }}
+        </delete-form>
+    {% endif %}
+{% endblock %}

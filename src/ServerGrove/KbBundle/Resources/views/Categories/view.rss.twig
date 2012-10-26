@@ -1,0 +1,24 @@
+{% extends "ServerGroveKbBundle::layout.rss.twig" %}
+
+{% block title %}Articles from {{ category.name }}{% endblock %}
+
+{% block description %}{{ category.description }}{% endblock %}
+
+{% block lastBuildDate %}
+{% spaceless %}
+{% if articles|length > 0 %}
+{{ articles.current.created|date('r') }}
+{% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block items %}
+{% for article in articles %}
+<item>
+    <title>{{ article.getTitle(app.request.locale) }}</title>
+    <link>{{ url('sgkb_articles_view', { '_format': "html", 'category': category.slug, 'slug': article.slug }) }}</link>
+    <description>{{ article.getContent(app.request.locale)|striptags }}</description>
+    <pubDate>{{ article.created|date('r') }}</pubDate>
+</item>
+{% endfor %}
+{% endblock %}

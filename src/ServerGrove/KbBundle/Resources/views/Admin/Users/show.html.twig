@@ -1,0 +1,33 @@
+{% extends "ServerGroveKbBundle:Admin:layout.html.twig" %}
+
+{% block postheader %}
+    {{ parent() }}
+    {{ sgkb_breadcrumb.displayBreadcrumb(false, false, true) }}
+{% endblock postheader %}
+
+{% block content %}
+<h1>User</h1>
+
+<dl class="dl-horizontal">
+    <dt>{% trans %}Name{% endtrans %}</dt>
+    <dd>{{ document.name }}</dd>
+    <dt>{% trans %}Username{% endtrans %}</dt>
+    <dd>{{ document.username }}</dd>
+    <dt>{% trans %}Email{% endtrans %}</dt>
+    <dd>{{ document.email }}</dd>
+    <dt>{% trans %}Roles{% endtrans %}</dt>
+    <dd>{{ document.roles|join(", ") }}</dd>
+    <dt>{% trans %}Enabled{% endtrans %}</dt>
+    <dd>{{ document.enabled|booltostr }}</dd>
+    <dt>{% trans %}Locked{% endtrans %}</dt>
+    <dd>{{ document.locked|booltostr }}</dd>
+</dl>
+
+<div class="well">
+    {% set extras %}
+    <a class="btn" href="{{ path('sgkb_admin_users_index') }}">{% trans %}Back to the list{% endtrans %}</a>
+    {{ sgkb.editLink('sgkb_admin_users_edit', { 'username': document.username }, { 'class': "btn" }, 'Edit User') }}
+    {% endset %}
+    {{ sgkb.deleteForm(delete_form, 'sgkb_admin_users_delete', { 'username': document.username }, extras) }}
+</div>
+{% endblock %}

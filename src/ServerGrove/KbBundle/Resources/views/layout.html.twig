@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="{% block ng_app %}ServerGroveKb{% endblock ng_app %}">
+<head>
+    <title>{% block title %}Knowledge Base{% endblock %}</title>
+    {% block metas %}{% endblock %}
+    {% block javascripts %}
+        {% spaceless %}
+            {% javascripts
+            "@ServerGroveKbBundle/Resources/public/js/*.js"
+            "@ServerGroveKbBundle/Resources/public/js/frontend/*.js"
+            "@ServerGroveKbBundle/Resources/public/js/google-code-prettify/*.js"
+            filter="?yui_js" output="/js/compiled/frontend.js" %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endspaceless %}
+    {% endblock %}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">Project name</a>
+
+        </div>
+    </div>
+</div>
+
+<div class="subnav">
+    <div class="nav-collapse">
+        <div class="container">
+
+            <div class="row">
+
+                {% block body %}
+                {% block preheader %}{% endblock preheader %}
+                <div class="title-page">
+                    {% block postheader %}{% endblock postheader %}
+                </div>
+                {% include "ServerGroveKbBundle:Default:breadcrumb.html.twig" %}
+                {% render "ServerGroveKbBundle:Default:searchForm" %}
+                <div class="span2">
+                    {% render "ServerGroveKbBundle:Categories:selector" with { 'topCategory': category is defined ?
+                    category.getTopCategory() :
+                    article is defined ?
+                    article.getDefaultCategory().getTopCategory() : null
+                    } %}
+                </div>
+                <div class="span10">
+                    {% block content %}{% endblock content %}
+                </div>
+
+
+            </div>
+
+
+            <hr>
+
+            <footer>
+                <p>&copy; Company 2012</p>
+            </footer>
+
+
+        </div>
+    </div>
+</div>
+
+{% block prefooter %}{% endblock prefooter %}
+{% block postfooter %}{% endblock postfooter %}
+{% endblock body %}
+</body>
+</html>

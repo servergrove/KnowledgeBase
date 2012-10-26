@@ -1,0 +1,18 @@
+{% extends "ServerGroveKbBundle:Admin:layout.html.twig" %}
+
+{% block postheader %}
+    {{ parent() }}
+    {{ sgkb_breadcrumb.displayBreadcrumb(false, parent|default(false), true) }}
+{% endblock postheader %}
+
+{% block content %}
+    {% set actionPath = parent ? path('sgkb_admin_categories_create_subcategory', { path: parent.path }) : path('sgkb_admin_categories_create') %}
+    <form class="form-horizontal" action="{{ actionPath }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form, { legend: "Category creation"|trans }) }}
+
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">{% trans %}Create{% endtrans %}</button>
+            <a class="btn" href="{{ path('sgkb_admin_categories_index') }}">{% trans %}Cancel{% endtrans %}</a>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,114 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: jackrabbit.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: %kernel.debug%
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    default_locale:  %locale%
+    trust_proxy_headers: false # Should Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
+    session:         ~
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+        resources:
+            - "ServerGroveKbBundle:Form:fields.html.twig"
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        [ ServerGroveKbBundle ]
+    filters:
+        cssrewrite: ~
+        # closure:
+        #     jar: %kernel.root_dir%/java/compiler.jar
+        yui_css:
+            jar: %kernel.root_dir%/java/yuicompressor-2.4.7.jar
+        yui_js:
+            jar: %kernel.root_dir%/java/yuicompressor-2.4.7.jar
+
+doctrine_phpcr:
+    # configure the PHPCR session
+    session:
+        backend:
+            ## backend type: jackrabbit, doctrinedbal or midgard
+            type: jackrabbit
+
+            ## doctrinedbal only, required
+            connection: <service name of the doctrine dbal connection>
+
+            ## jackrabbit only, required
+            url: http://localhost:8080/server/
+            ## jackrabbit only, optional. see https://github.com/jackalope/jackalope/blob/master/src/Jackalope/RepositoryFactoryJackrabbit.php
+            default_header: ...
+            expect: 'Expect: 100-continue'
+
+            ## tweak options for jackrabbit and doctrinedbal (all jackalope versions)
+            # optional, below set to the default
+            # enable if you want to have an exception right away if backend login fails
+            check_login_on_server: false
+            # enable if you experience segmentation faults while working with binary data in documents
+            disable_stream_wrapper: false
+            # enable if you do not want to use transactions and you neither want the odm to automatically use transactions
+            # its highly recommended NOT to disable transactions
+            disable_transactions: false
+        workspace: sgkb
+        username: admin
+        password: admin
+    # enable the ODM layer
+    odm:
+        auto_mapping: true
+        # whether to automatically create proxy classes or create them manually
+        auto_generate_proxy_classes: %kernel.debug%
+        # set the language fallback order (for translatable documents)
+        locales:
+            en:
+                - en
+                - es
+                - pt
+            es:
+                - es
+                - en
+                - pt
+            pt:
+                - pt
+                - en
+                - es
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+
+#jms_security_extra:
+#    secure_controllers:  true
+#    secure_all_services: false
+
+#fos_rest:
+#    body_listener: false
+#    format_listener: false
+#    view:
+#        view_response_listener: false
+
+server_grove_kb:
+    locales: [en, es, pt]
+
+knp_markdown:
+    parser:
+        service: server_grove_kb.markdown.parser
