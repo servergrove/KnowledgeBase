@@ -11,6 +11,10 @@ Features
 - Multiple Users, with admin and editor privileges
 - Multiple categories
 - Categories and Articles can be localized in multiple languages
+- Articles content can be written in HTML or Markdown
+- Easy to skin, based on Bootstrap
+- Search
+- Live preview on article editing page
 
 Installation
 ------------
