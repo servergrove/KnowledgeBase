@@ -1,6 +1,9 @@
 {
     "name": "servergrove/knowledgebase",
     "description": "The ServerGrove KnowledgeBase web based application",
+	"keywords": ["kb","knowledgebase"],
+	"homepage": "http://github.com/servergrove/KnowledgeBase",
+	"license": "MIT",
     "autoload": {
         "psr-0": { "": "src/" }
     },
