@@ -11,7 +11,7 @@ use Knp\Bundle\MarkdownBundle\Parser\MarkdownParser as BaseParser;
  */
 class MarkdownParser extends BaseParser
 {
-    protected function doFencedCodeBlocks($text)
+    public function doFencedCodeBlocks($text)
     {
         $text = preg_replace_callback('{
                 (?:\n|\A)
