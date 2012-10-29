@@ -1,7 +1,7 @@
 KnowledgeBase
 =============
 
-This is a complete Knowledge Base software built on Symfony2 and PHPCR developed and open sourced by ServerGrove. Our website http://kb.servergrove.com is ran on this KnowledgeBase software.
+This is a complete Knowledge Base software built on top of the Symfony2 CMF project, developed and open sourced by ServerGrove. Our website http://kb.servergrove.com is running on this KnowledgeBase software.
 
 Features
 --------

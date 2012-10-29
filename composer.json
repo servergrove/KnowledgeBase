@@ -1,6 +1,6 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "name": "servergrove/knowledgebase",
+    "description": "The ServerGrove KnowledgeBase web based application",
     "autoload": {
         "psr-0": { "": "src/" }
     },
