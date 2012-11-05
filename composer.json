@@ -36,7 +36,7 @@
                 "name": "codemirror/codemirror",
                 "version": "2.33",
                 "dist": {
-                    "url": "https://github.com/marijnh/CodeMirror/zipball/v2.33",
+                    "url": "https://github.com/marijnh/CodeMirror/archive/v2.33.zip",
                     "type": "zip"
                 },
                 "source": {
@@ -52,7 +52,7 @@
                 "name": "chjj/marked",
                 "version": "v0.2.5",
                 "dist": {
-                    "url": "https://github.com/chjj/marked/zipball/v0.2.5",
+                    "url": "https://github.com/chjj/marked/archive/v0.2.5.zip",
                     "type": "zip"
                 },
                 "source": {
