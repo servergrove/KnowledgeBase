@@ -72,7 +72,7 @@ class ArticleExtension extends \Twig_Extension
                 ->manager
                 ->findTranslation(get_class($article), $article->getId(), $locale, false)
                 ->getIsActive();
-        } catch (\RuntimeException $e) {
+        } catch (\InvalidArgumentException $e) {
             $active = false;
         }
 

@@ -147,7 +147,7 @@ class CategoriesController extends Controller
         foreach ($locales as $locale) {
             try {
                 $tmp = $dm->findTranslation(get_class($category), $category->getId(), $locale, false);
-            } catch (\RuntimeException $e) {
+            } catch (\InvalidArgumentException $e) {
                 $tmp = clone $original;
                 $tmp->setLocale($locale)->setDescription('');
             }

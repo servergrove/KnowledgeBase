@@ -84,7 +84,7 @@ class UrlsControllerTest extends ControllerTestCase
         $translation = $dm->findTranslation($className, $url->getId(), 'es', false);
         $this->assertInstanceOf('ServerGrove\KbBundle\Document\Url', $translation);
 
-        $this->setExpectedException('RuntimeException');
+        $this->setExpectedException('InvalidArgumentException');
         $dm->findTranslation($className, $url->getId(), 'pt', false);
     }
 
