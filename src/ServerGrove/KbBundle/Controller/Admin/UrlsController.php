@@ -144,7 +144,7 @@ class UrlsController extends Controller
             $requiredFields = true;
             try {
                 $tmp = $dm->findTranslation('ServerGrove\KbBundle\Document\Url', $url->getId(), $locale, false);
-            } catch (\RuntimeException $e) {
+            } catch (\InvalidArgumentException $e) {
                 $tmp = clone $url;
                 $tmp->setName(null)->setUrl(null);
                 $requiredFields = false;
@@ -179,7 +179,7 @@ class UrlsController extends Controller
             try {
                 $translation = $dm->findTranslation('ServerGrove\KbBundle\Document\Url', $url->getId(), $locale, false);
                 $required    = true;
-            } catch (\RuntimeException $e) {
+            } catch (\InvalidArgumentException $e) {
                 $translation = $dm->findTranslation('ServerGrove\KbBundle\Document\Url', $url->getId(), $locale);
                 $required = false;
             }

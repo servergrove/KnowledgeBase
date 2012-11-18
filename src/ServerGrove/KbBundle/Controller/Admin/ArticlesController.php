@@ -148,7 +148,7 @@ class ArticlesController extends Controller
         foreach ($locales as $locale) {
             try {
                 $tmp = $dm->findTranslation(null, $article->getId(), $locale, false);
-            } catch (\RuntimeException $e) {
+            } catch (\InvalidArgumentException $e) {
                 $tmp = clone $original;
                 $tmp->setIsActive(false)->setContent('');
             }

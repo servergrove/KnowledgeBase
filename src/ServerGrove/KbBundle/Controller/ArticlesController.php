@@ -153,7 +153,7 @@ class ArticlesController extends Controller
                 if ($articleTranslation->getIsActive()) {
                     $activeLocales[] = $locale;
                 }
-            } catch (\RuntimeException $e) {
+            } catch (\InvalidArgumentException $e) {
 
             }
         }
