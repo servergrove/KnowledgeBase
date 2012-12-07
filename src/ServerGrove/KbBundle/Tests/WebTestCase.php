@@ -81,11 +81,13 @@ class WebTestCase extends BaseTestCase
      */
     private function setupSchemas()
     {
-        $path = __DIR__.'/..';
+        $input = $this->getInputDefinition(array('--fixtures' => __DIR__.'/../DataFixtures/PHPCR'));
+        $input->setInteractive(false);
+
         $this
             ->getApplication()
             ->find('doctrine:phpcr:fixtures:load')
-            ->run($this->getInputDefinition(array('--fixtures' => $path.'/DataFixtures/PHPCR')), new NullOutput());
+            ->run($input, new NullOutput());
     }
 
     /**
