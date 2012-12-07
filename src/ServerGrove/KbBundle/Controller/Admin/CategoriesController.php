@@ -285,7 +285,7 @@ class CategoriesController extends Controller
         /** @var $article Article */
         foreach ($category->getArticles() as $article) {
             $article->removeCategory($category);
-            if (1 == $article->getCategories()->count()) {
+            if (0 == $article->getCategories()->count()) {
                 $logger->info(sprintf('Removing article "%s"', $article->getTitle()));
                 $dm->remove($article);
             }
