@@ -44,10 +44,15 @@ The installation is quite simple, follow these steps:
 	php app/console doctrine:phpcr:workspace:create sgkb
 	php app/console doctrine:phpcr:register-system-node-types
 	php app/console doctrine:phpcr:fixtures:load
+
+	# In production, you will need to dump the asset files
 	
+	php app/console assetic:dump --env=prod --no-debug
+
 	# start web server (PHP 5.4 only)
 	
 	php app/console  server:run
+	
 
 Once you completed these steps, if you are not using PHP 5.4, setup your web server virtual host to point to kb.local/web.
 
