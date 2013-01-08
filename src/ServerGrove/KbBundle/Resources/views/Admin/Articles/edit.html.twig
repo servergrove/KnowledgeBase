@@ -73,7 +73,7 @@
         <div class="well">
             <button class="btn" type="button" data-toggle="collapse"
                     data-target="#article_edit_{{ locale }}">{% trans with { '%locale%': locale } %}Edit "%locale%" Version{% endtrans %}
-                {% if translation_form.isActive.vars.checked|default(false) %}
+                {% if translation_form.isActive.getVars().checked|default(false) %}
                 <span class="label label-success">{% trans %}Active{% endtrans %}</span>
                 {% else %}
                 <span class="label label-important">{% trans %}Disabled{% endtrans %}</span>
@@ -100,7 +100,7 @@
     </translation>
     <script type="text/javascript">
         /* <![CDATA[ */
-        var {{ locale }}TranslationCtrl = getTranslationController('{{ translation_form.content.vars.value|escape('js') }}', '{{ translation_form.vars.contentType|escape('js') }}', '{{ locale }}');
+        var {{ locale }}TranslationCtrl = getTranslationController('{{ translation_form.content.getVars().value|escape('js') }}', '{{ translation_form.getVars().contentType|escape('js') }}', '{{ locale }}');
         /* ]]> */
     </script>
     {% endfor %}
