@@ -401,4 +401,12 @@ class Category
     {
         return $this->visibility;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasCategoriesOrArticles()
+    {
+        return 0 < $this->getArticles()->count() || 0 < $this->getChildren()->count();
+    }
 }

@@ -53,9 +53,11 @@
                     method: '@method',
                     confirmation: '@confirmation'
                 },
-                link: function (scope, element, attrs) {
+                link: function (scope, element) {
                     scope.doDelete = function () {
-                        if (window.confirm(scope.confirmation)) {
+                        if (angular.isUndefined(scope.confirmation) || !angular.isString(scope.confirmation)) {
+                            element.find('form').submit();
+                        } else if (window.confirm(scope.confirmation)) {
                             element.find('form').submit();
                         }
                     };
@@ -307,11 +309,11 @@
 
         var timeout = null, state, nextCall;
 
-        $scope.$watch('categories.values', function (newValue, oldValue) {
+        $scope.$watch('categories.values', function () {
             $scope.categories.invalid = 0 === $scope.categories.values.length;
         });
 
-        $scope.$watch('title.value', function (newValue, oldValue) {
+        $scope.$watch('title.value', function (newValue) {
 
             if ('' === newValue || null === newValue) {
                 window.clearTimeout(timeout);
