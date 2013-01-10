@@ -40,7 +40,6 @@ class DefaultController extends Controller
                     'article'      => $article,
                     'category'     => $article->getDefaultCategory(),
                     'registerView' => false,
-                    'searchForm'   => true,
                     'showComments' => false
                 )
             );
