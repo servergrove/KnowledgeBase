@@ -35,8 +35,8 @@ class ArticlesControllerTest extends ControllerTestCase
         $client  = $this->getClient();
         $crawler = $client->request('GET', '/'.$locale.'/categories/test/articles/the-title-of-my-article.html');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertGreaterThan(0, $crawler->filter('#doccontent h2.article-title')->count());
-        $this->assertEquals($title, $crawler->filter('#doccontent h2.article-title')->first()->text(), $crawler->filter('#doccontent h2.article-title')->first()->text());
+        $this->assertGreaterThan(0, $crawler->filter('h2.article-title')->count());
+        $this->assertEquals($title, $crawler->filter('h2.article-title')->first()->text());
     }
 
     public function getTestData()

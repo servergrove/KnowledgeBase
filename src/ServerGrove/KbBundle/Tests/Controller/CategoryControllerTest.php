@@ -10,9 +10,9 @@ class CategoryControllerTest extends ControllerTestCase
         /* @var $crawler \Symfony\Component\DomCrawler\Crawler */
         $crawler = $this->getClient()->request('GET', '/');
         $this->assertGreaterThan(0, $crawler->filter('h1:contains("Knowledge Base")')->count(), 'There is no header for KB');
-        $this->assertGreaterThan(0, $crawler->filter('.left-nav ul li a:contains("Test")')->count());
+        $this->assertGreaterThan(0, $crawler->filter('ul.nav li a:contains("Test")')->count());
 
-        $link = $crawler->filter('.left-nav ul li a:contains("Test")')->first()->link();
+        $link = $crawler->filter('ul.nav li a:contains("Test")')->first()->link();
         $crawler = $this->getClient()->click($link);
         $this->assertGreaterThan(0, $crawler->filter('h1:contains("Knowledge Base")')->count(), 'There is no header for KB');
         $this->assertGreaterThan(0, $crawler->filter('.breadcrumb a:contains("Test")')->count(), 'There is no breadcrumb for Test category');
