@@ -29,12 +29,11 @@ class ArticlesController extends Controller
      * @param Article  $article
      * @param Category $category
      * @param bool     $registerView
-     * @param bool     $searchForm
      * @param bool     $showComments
      *
      * @return array
      */
-    public function viewAction(Article $article, Category $category, $registerView = true, $searchForm = false, $showComments = true)
+    public function viewAction(Article $article, Category $category, $registerView = true, $showComments = true)
     {
         if ($registerView) {
             $this->registerView($article);
@@ -45,7 +44,6 @@ class ArticlesController extends Controller
         return array(
             'category'     => $category,
             'article'      => $article,
-            'searchForm'   => $searchForm,
             'showComments' => $showComments
         );
     }

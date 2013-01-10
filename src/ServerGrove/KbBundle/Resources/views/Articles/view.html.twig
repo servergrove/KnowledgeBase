@@ -9,10 +9,6 @@
 
 {% block content %}
     {% spaceless %}
-        {% if searchForm is defined and searchForm %}
-            {% render "ServerGroveKbBundle:Default:searchForm" %}
-        {% endif %}
-
         {% set showComments = showComments is defined ? showComments : true %}
         {% render "ServerGroveKbBundle:Articles:articleContent" with { 'article': article, 'category': category, 'showComments': showComments } %}
     {% endspaceless %}

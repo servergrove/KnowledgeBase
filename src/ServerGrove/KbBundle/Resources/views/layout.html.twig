@@ -43,7 +43,6 @@
                     {% block postheader %}{% endblock postheader %}
                 </div>
                 {% include "ServerGroveKbBundle:Default:breadcrumb.html.twig" %}
-                {% render "ServerGroveKbBundle:Default:searchForm" %}
                 <div class="span2">
                     {% render "ServerGroveKbBundle:Categories:selector" with { 'topCategory': category is defined ?
                     category.getTopCategory() :
@@ -52,6 +51,7 @@
                     } %}
                 </div>
                 <div class="span10">
+                    {% render "ServerGroveKbBundle:Default:searchForm" %}
                     {% block content %}{% endblock content %}
                 </div>
 
