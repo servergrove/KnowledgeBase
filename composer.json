@@ -27,7 +27,8 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "servergrove/translation-editor-bundle": "dev-master",
         "jackalope/jackalope-jackrabbit": "dev-master",
-        "knplabs/knp-markdown-bundle": "dev-master"
+        "knplabs/knp-markdown-bundle": "dev-master",
+        "servergrove/kb-bundle": "dev-master"
     },
     "repositories": [
         {
