@@ -12,7 +12,7 @@ use Composer\Util\RemoteFilesystem;
  */
 class JackrabbitInstaller
 {
-    const JACKRABBIT_VERSION = '2.4.3';
+    const JACKRABBIT_VERSION = '2.4.4';
 
     /**
      * @var string
