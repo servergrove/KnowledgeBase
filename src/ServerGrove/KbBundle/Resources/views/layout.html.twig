@@ -31,43 +31,36 @@
     </div>
 </div>
 
-<div class="subnav">
-    <div class="nav-collapse">
-        <div class="container">
+<div class="container">
+    <div class="row">
 
-            <div class="row">
-
-                {% block body %}
-                {% block preheader %}{% endblock preheader %}
-                <div class="title-page">
-                    {% block postheader %}{% endblock postheader %}
-                </div>
-                {% include "ServerGroveKbBundle:Default:breadcrumb.html.twig" %}
-                {% render "ServerGroveKbBundle:Default:searchForm" %}
-                <div class="span2">
-                    {% render "ServerGroveKbBundle:Categories:selector" with { 'topCategory': category is defined ?
-                    category.getTopCategory() :
-                    article is defined ?
-                    article.getDefaultCategory().getTopCategory() : null
-                    } %}
-                </div>
-                <div class="span10">
-                    {% block content %}{% endblock content %}
-                </div>
-
-
-            </div>
-
-
-            <hr>
-
-            <footer>
-                <p>&copy; Company 2012</p>
-            </footer>
-
-
+        {% block body %}
+        {% block preheader %}{% endblock preheader %}
+        <div class="title-page">
+            {% block postheader %}{% endblock postheader %}
         </div>
+        {% include "ServerGroveKbBundle:Default:breadcrumb.html.twig" %}
+        {% render "ServerGroveKbBundle:Default:searchForm" %}
+        <div class="span2">
+            {% render "ServerGroveKbBundle:Categories:selector" with { 'topCategory': category is defined ?
+            category.getTopCategory() :
+            article is defined ?
+            article.getDefaultCategory().getTopCategory() : null
+            } %}
+        </div>
+        <div class="span10">
+            {% block content %}{% endblock content %}
+        </div>
+
+
     </div>
+
+
+    <hr>
+
+    <footer>
+        <p>&copy; Company 2012</p>
+    </footer>
 </div>
 
 {% block prefooter %}{% endblock prefooter %}
