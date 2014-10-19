@@ -82,7 +82,7 @@ class ArticlesControllerTest extends ControllerTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), $this->getErrorMessage($client));
 
         $form = $crawler->selectButton('Save')->form();
-        $form['article[categories]']->select(array('/categories/mysql', '/categories/billing'));
+        $form['article[categories]']->select(array('/categories/category-a', '/categories/category-b'));
 
         $client->submit($form);
         $this->assertEquals(302, $client->getResponse()->getStatusCode(), $this->getErrorMessage($client));
@@ -96,7 +96,7 @@ class ArticlesControllerTest extends ControllerTestCase
         /** @var $category \ServerGrove\KbBundle\Document\Category */
         foreach ($article->getCategories() as $category) {
             $this->assertInstanceOf('ServerGrove\KbBundle\Document\Category', $category);
-            $this->assertTrue(in_array($category->getName(), array('MySQL', 'Billing')));
+            $this->assertTrue(in_array($category->getName(), array('Category A', 'Category B')));
         }
 
         $crawler = $client->request('GET', $url = $this->generateUrl('sgkb_admin_articles_edit', array('slug' => $slug = Sluggable::urlize($this->title))));

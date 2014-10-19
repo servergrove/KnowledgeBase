@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use ServerGrove\KbBundle\Document\Article;
 use ServerGrove\KbBundle\Document\Category;
@@ -222,14 +223,19 @@ class CategoriesController extends Controller
      * Deletes a Category document.
      *
      * @Route("/{path}/delete", name="sgkb_admin_categories_delete", requirements={"path":".+"})
+     * @Route("/{path}/delete/confirmed", name="sgkb_admin_categories_delete_confirmed", requirements={"path":".+"})
      * @Method("post")
      * @ParamConverter("category", class="ServerGroveKbBundle:Category")
      *
      */
     public function deleteAction(Category $category)
     {
-        $form    = $this->createDeleteForm($category);
         $request = $this->getRequest();
+        if ('sgkb_admin_categories_delete_confirmed' != $request->get('_route')) {
+            return $this->forward('ServerGroveKbBundle:Admin/Categories:deleteConfirmation', array('category' => $category));
+        }
+
+        $form    = $this->createDeleteForm($category);
 
         $form->bind($request);
 
@@ -241,9 +247,28 @@ class CategoriesController extends Controller
 
             $dm->remove($category);
             $dm->flush();
+        } else {
+            var_dump($form->getErrorsAsString());
+            exit;
         }
 
         return $this->redirect($this->generateUrl('sgkb_admin_categories_index'));
+    }
+
+    /**
+     * Confirmation action for category removal
+     *
+     * @Template
+     *
+     * @param Category $category
+     *
+     * @return array
+     */
+    public function deleteConfirmationAction(Category $category)
+    {
+        $form = $this->createDeleteForm($category);
+
+        return array('category' => $category, 'form' => $form->createView());
     }
 
     /**
@@ -274,6 +299,7 @@ class CategoriesController extends Controller
     {
         /** @var $category Category */
         $category = func_get_arg(1 == func_num_args() ? 0 : 1);
+        $this->get('logger')->info(sprintf('Removing articles from category "%s"', $category->getName()));
 
         if (!($category instanceof Category)) {
             throw new \RuntimeException('Expected instance of Category');
@@ -294,14 +320,10 @@ class CategoriesController extends Controller
 
     public function removeChildrenFromCategory(Category $category)
     {
-        $controller = $this;
-
+        $this->get('logger')->info(sprintf('Removing children from category "%s"', $category->getName()));
         foreach ($category->getChildren() as $child) {
-            call_user_func(array($controller, 'removeArticlesFromCategory'), $child);
-            call_user_func(array($controller, 'removeChildrenFromCategory'), $child);
-
-            /** @var $category Category */
-            $category->getChildren()->removeElement($child);
+            call_user_func(array($this, 'removeArticlesFromCategory'), $child);
+            call_user_func(array($this, 'removeChildrenFromCategory'), $child);
         }
     }
 

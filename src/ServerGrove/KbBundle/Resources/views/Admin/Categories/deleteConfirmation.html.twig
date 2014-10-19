@@ -1,0 +1,39 @@
+{% extends "ServerGroveKbBundle:Admin:layout.html.twig" %}
+
+{% macro displayCategoryTree(category) %}
+    <ul>
+        {% for subcategory in category.getChildren() %}
+            <li>{{ subcategory.getName() }}
+                {% if subcategory.getChildren()|length > 0 %}
+                    <br>
+                    {{ _self.displayCategoryTree(subcategory) }}
+                {% endif %}
+            </li>
+        {% endfor %}
+        {% for article in category.getArticles() %}
+            {% if article.getCategories()|length == 1 %}
+                <li>
+                    <a target="_blank" href="{{ path('sgkb_articles_view', {'path': article.getDefaultCategory().getPath(), 'slug': article.slug}) }}">
+                        {{ article.title }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% import _self as mymacros %}
+
+{% block content %}
+    <h1>{% trans with {'%category%': category} %}Deleting category "%category%"{% endtrans %}</h1>
+
+    <div>The following categories are going to be removed</div>
+    <form action="{{ path('sgkb_admin_categories_delete_confirmed', {'path': category.path()}) }}" method="post" class="form-horizontal">
+        {{ mymacros.displayCategoryTree(category) }}
+        {{ form_widget(form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">{% trans %}Delete{% endtrans %}</button>
+            <a class="btn" href="{{ path('sgkb_admin_categories_index') }}">{% trans %}Cancel{% endtrans %}</a>
+        </div>
+    </form>
+{% endblock %}
