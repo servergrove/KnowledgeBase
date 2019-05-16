@@ -578,7 +578,7 @@
         },
         {
             "name": "jackalope/jackalope-jackrabbit",
-            "version": "dev-master",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jackalope/jackalope-jackrabbit",
